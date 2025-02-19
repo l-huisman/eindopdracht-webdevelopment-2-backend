@@ -1,0 +1,34 @@
+{
+  "name": "eindopdracht-webdevelopment-2-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --project",
+    "start:dev": "nodemon src/index.ts",
+    "start:prod": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/l-huisman/eindopdracht-webdevelopment-2-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/l-huisman/eindopdracht-webdevelopment-2-backend/issues"
+  },
+  "homepage": "https://github.com/l-huisman/eindopdracht-webdevelopment-2-backend#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "tsc": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
