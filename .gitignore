@@ -8,3 +8,7 @@ Thumbs.db
 
 # Development
 .env
+
+# IDE
+.idea/
+.vscode/
