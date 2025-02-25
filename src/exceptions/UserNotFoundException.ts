@@ -1,6 +1,6 @@
 import {CustomException} from "./CustomException";
 
-export class NotImplementedException extends CustomException {
+export class UserNotFoundException extends CustomException {
     constructor(message: string, statusCode: number, error?: Error) {
         super(message, statusCode, error)
     }

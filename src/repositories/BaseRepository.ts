@@ -1,6 +1,7 @@
 import {Connection, createConnection, MysqlError} from "mysql";
 import dotenv from "dotenv";
 
+
 dotenv.config();
 
 export class BaseRepository {
@@ -35,7 +36,7 @@ export class BaseRepository {
         try {
             this.openConnection();
             await new Promise<void>((resolve, reject) => {
-                this.connection.query(query, params, (error: any, results: any) => {
+                this.connection.query(query, params, (error: any) => {
                     if (error) {
                         console.error(`Error executing query: ${error}`);
                         reject(new Error("Error executing query"));
