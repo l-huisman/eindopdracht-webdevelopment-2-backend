@@ -14,8 +14,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydatabase
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_USER: api
+      MYSQL_PASSWORD: apipassword
     ports:
       - "3306:3306"
     volumes:
