@@ -1,5 +1,8 @@
 USE mydatabase;
 
+ALTER USER 'root' IDENTIFIED WITH caching_sha2_password BY 'rootpassword';
+FLUSH PRIVILEGES;
+
 CREATE TABLE users
 (
     id    INT AUTO_INCREMENT PRIMARY KEY,
