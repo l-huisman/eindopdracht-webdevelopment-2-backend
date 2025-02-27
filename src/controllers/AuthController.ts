@@ -1,12 +1,12 @@
 import APIResponseDTO from "../dtos/APIResponseDTO";
 import LoginResponseDTO from "../dtos/LoginResponseDTO";
 import UserResponseDTO from "../dtos/UserResponseDTO";
-import { PasswordValidationException } from "../exceptions/PasswordValidationException";
-import { UserCreationException } from "../exceptions/UserCreationException";
-import { UserDTOException } from "../exceptions/UserDTOException";
-import { UserNotFoundException } from "../exceptions/UserNotFoundException";
+import {PasswordValidationException} from "../exceptions/PasswordValidationException";
+import {UserCreationException} from "../exceptions/UserCreationException";
+import {UserDTOException} from "../exceptions/UserDTOException";
+import {UserNotFoundException} from "../exceptions/UserNotFoundException";
 import AuthService from "../services/AuthService";
-import { Request, Response } from "express";
+import {Request, Response} from "express";
 
 export default class AuthController {
     public async login(req: Request, res: Response): Promise<void> {

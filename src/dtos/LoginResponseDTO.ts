@@ -3,6 +3,7 @@ export default class LoginResponseDTO {
     public email: string;
     public username: string;
     public token: string;
+
     constructor(id: string, email: string, username: string, token: string) {
         this.id = id;
         this.email = email;

@@ -2,6 +2,7 @@ export default class LoginRequestDTO {
     public email: string;
     public username: string;
     public password: string;
+
     constructor(email: string, username: string, password: string) {
         this.email = email;
         this.username = username;

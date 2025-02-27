@@ -1,16 +1,15 @@
 USE mydatabase;
 
-ALTER USER 'root' IDENTIFIED WITH caching_sha2_password BY 'rootpassword';
-FLUSH PRIVILEGES;
-
 CREATE TABLE users
 (
     id    INT AUTO_INCREMENT PRIMARY KEY,
-    name  VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL
+    username  VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (name, email)
-VALUES ('Info', 'info@lukehuisman.nl');
-INSERT INTO users (name, email)
-VALUES ('Dev', 'dev@lukehuisman.nl');
+INSERT INTO users (username, email, password)
+VALUES ('Info', 'info@lukehuisman.nl', 'password');
+INSERT INTO users (username, email, password)
+VALUES ('Dev', 'dev@lukehuisman.nl', 'password');
