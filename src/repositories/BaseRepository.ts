@@ -6,27 +6,6 @@ dotenv.config();
 export class BaseRepository {
     private connection: Connection | null = null;
 
-    private async openConnection(): Promise<void> {
-        if (!this.connection) {
-            this.connection = await createConnection({
-                host: process.env.DB_HOST,
-                user: process.env.DB_USERNAME,
-                password: process.env.DB_PASSWORD,
-                database: process.env.DB_DATABASE,
-                port: Number(process.env.DB_PORT),
-                insecureAuth: true, // The server doesn't use SSL
-            });
-            console.log("Database connected successfully");
-        }
-    }
-
-    private async closeConnection(): Promise<void> {
-        if (this.connection) {
-            await this.connection.end();
-            this.connection = null;
-        }
-    }
-
     public async executeNonQuery(query: string, params?: any[]): Promise<void> {
         await this.openConnection();
         try {
@@ -50,6 +29,27 @@ export class BaseRepository {
             throw new Error("Error executing query");
         } finally {
             await this.closeConnection();
+        }
+    }
+
+    private async openConnection(): Promise<void> {
+        if (!this.connection) {
+            this.connection = await createConnection({
+                host: process.env.DB_HOST,
+                user: process.env.DB_USERNAME,
+                password: process.env.DB_PASSWORD,
+                database: process.env.DB_DATABASE,
+                port: Number(process.env.DB_PORT),
+                insecureAuth: true, // The server doesn't use SSL
+            });
+            console.log("Database connected successfully");
+        }
+    }
+
+    private async closeConnection(): Promise<void> {
+        if (this.connection) {
+            await this.connection.end();
+            this.connection = null;
         }
     }
 }

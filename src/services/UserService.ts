@@ -1,7 +1,4 @@
 import UserRepository from "../repositories/UserRepository";
-import { UserDTOException } from "../exceptions/UserDTOException";
-import { UserCreationException } from "../exceptions/UserCreationException";
-import { UserNotFoundException } from "../exceptions/UserNotFoundException";
 import IUser from "../interfaces/IUser";
 import UserResponseDTO from "../dtos/UserResponseDTO";
 
