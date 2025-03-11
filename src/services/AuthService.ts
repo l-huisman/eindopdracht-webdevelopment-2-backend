@@ -10,28 +10,26 @@ import {PasswordValidationException} from "../exceptions/PasswordValidationExcep
 import LoginResponseDTO from "../dtos/LoginResponseDTO";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import {UserCreationException} from "../exceptions/UserCreationException";
 
 dotenv.config();
 
 export default class AuthService {
-    private userRepository: UserRepository;
+    private readonly userRepository: UserRepository;
     private readonly jwtSecret: Secret;
 
     constructor() {
         this.userRepository = new UserRepository();
-        this.jwtSecret = process.env.JWT_SECRET || 'a_very_secret_key';
+        this.jwtSecret = process.env.JWT_SECRET ?? 'a_very_secret_key';
     }
 
     public async register(userRequest: UserRequestDTO): Promise<UserResponseDTO> {
         if (!userRequest.email || !userRequest.username || !userRequest.password) {
             throw new UserDTOException("Not all field have correctly been filled", 403);
         }
-        // if (await this.userRepository.getUserByEmail(userRequest.email)) {
-        //     throw new UserCreationException("User with this email already exists", 403);
-        // }
-        // if (await this.userRepository.getUserByUsername(userRequest.username)) {
-        //     throw new UserCreationException("User with this username already exists", 403);
-        // }
+        if (await this.userRepository.getUserByEmail(userRequest.email)) {
+            throw new UserCreationException("User with this email already exists", 403);
+        }
         userRequest.password = await this.hashPassword(userRequest.password);
         await this.userRepository.createUser(userRequest);
         const user: IUser = await this.userRepository.getUserByEmail(userRequest.email);
