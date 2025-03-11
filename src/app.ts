@@ -16,7 +16,10 @@ class App {
         this.server.use(express.json());
         this.server.use(cors(
             {
-                origin: "localhost:5137"
+                origin: '*',
+                methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+                preflightContinue: false,
+                optionsSuccessStatus: 204
             }
         ));
     }

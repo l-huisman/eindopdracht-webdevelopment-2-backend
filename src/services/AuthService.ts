@@ -27,9 +27,14 @@ export default class AuthService {
         if (!userRequest.email || !userRequest.username || !userRequest.password) {
             throw new UserDTOException("Not all field have correctly been filled", 403);
         }
-        if (await this.userRepository.getUserByEmail(userRequest.email)) {
+
+        try {
+            await this.userRepository.getUserByEmail(userRequest.email);
             throw new UserCreationException("User with this email already exists", 403);
+        } catch (error) {
+
         }
+
         userRequest.password = await this.hashPassword(userRequest.password);
         await this.userRepository.createUser(userRequest);
         const user: IUser = await this.userRepository.getUserByEmail(userRequest.email);

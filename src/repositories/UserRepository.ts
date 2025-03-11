@@ -42,7 +42,7 @@ export default class UserRepository extends BaseRepository {
 
     public async createUser(user: UserRequestDTO): Promise<IUser> {
         try {
-            const query = "INSERT INTO `users` (`email`, `username`, `password`) VALUES (?, ?, ?);";
+            const query = "INSERT INTO `users` (`email`, `username`, `password`, `created_at`) VALUES (?, ?, ?, NOW())";
             const params = [user.email, user.username, user.password];
             const result = await this.executeQuery(query, params);
             const id = result[0].insertId;
