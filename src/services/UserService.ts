@@ -9,7 +9,7 @@ export default class UserService {
         this.userRepository = new UserRepository();
     }
 
-    public async getAll(): Promise<UserResponseDTO[]> {
+    public async getUsers(): Promise<UserResponseDTO[]> {
         return await this.userRepository.getUsers();
     }
 

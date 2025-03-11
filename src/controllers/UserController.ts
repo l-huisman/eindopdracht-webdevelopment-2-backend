@@ -4,6 +4,7 @@ import UserResponseDTO from "../dtos/UserResponseDTO";
 import APIResponseDTO from "../dtos/APIResponseDTO";
 import {UsersNotFoundException} from "../exceptions/UsersNotFoundException";
 
+
 export default class UserController {
     public async getUsers(req: Request, res: Response): Promise<void> {
         const userService = new UserService();
