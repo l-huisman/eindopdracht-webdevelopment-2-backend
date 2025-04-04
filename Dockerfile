@@ -10,6 +10,7 @@ COPY package*.json ./
 # Install the dependencies
 RUN npm install
 RUN npm install bcrypt
+RUN npm install cors
 
 # Copy the source code
 COPY . .
