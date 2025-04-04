@@ -59,7 +59,9 @@ export default class UserRepository extends BaseRepository {
             id: data.id,
             email: data.email,
             username: data.username,
-            password: data.password
+            password: data.password,
+            admin: data.admin,
+            createdAt: data.created_at,
         };
     }
 

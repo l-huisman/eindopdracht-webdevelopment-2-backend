@@ -59,7 +59,7 @@ export default class AuthService {
         const token = jwt.sign({id: user.id}, this.jwtSecret, {expiresIn: "1h"});
 
         // Return JWT and user info
-        return new LoginResponseDTO(user.id, user.email, user.username, token);
+        return new LoginResponseDTO(user.id, user.username, token, user.admin);
     }
 
     private hashPassword(password: string): any {
