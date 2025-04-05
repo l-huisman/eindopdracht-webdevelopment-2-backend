@@ -1,26 +1,13 @@
-import {Request, Response, Router} from 'express';
-import UserController from './controllers/UserController';
-import AuthController from "./controllers/AuthController";
+import {Router} from 'express';
+import userRoutes from './routes/userRoutes';
+import authRoutes from './routes/authRoutes';
+import groupRoutes from './routes/groupRoutes';
 
 const routes = Router();
 
-routes.get('/', (req: Request, res: Response) => {
-    return res.json({message: 'Hello World'});
-});
-
-routes.get('/users', (req: Request, res: Response) => {
-    const userController = new UserController();
-    return userController.getUsers(req, res);
-});
-
-routes.post('/login', (req: Request, res: Response) => {
-    const authController = new AuthController();
-    return authController.login(req, res);
-});
-
-routes.post('/register', (req: Request, res: Response) => {
-    const authController = new AuthController();
-    return authController.register(req, res);
-});
+routes.use('/v1/', (req, res) => res.json({message: 'Hello World'}));
+routes.use('/v1', userRoutes);
+routes.use('/v1', authRoutes);
+routes.use('/v1', groupRoutes);
 
 export default routes;
