@@ -3,12 +3,13 @@ import {BaseRepository} from "./BaseRepository";
 import {UserNotFoundException} from "../exceptions/UserNotFoundException";
 import {UserCreationException} from "../exceptions/UserCreationException";
 import UserRequestDTO from "../dtos/UserRequestDTO";
+import {ResultSetHeader, RowDataPacket} from "mysql2";
 
 export default class UserRepository extends BaseRepository {
     public async getUsers(): Promise<IUser[]> {
         try {
             const query = "SELECT * FROM `users`";
-            const result = await this.executeQuery(query);
+            const result = await this.executeQuery<RowDataPacket[]>(query);
             if (result.length === 0) {
                 throw new UserNotFoundException("Users not found in the database", 404);
             }
@@ -22,7 +23,10 @@ export default class UserRepository extends BaseRepository {
         try {
             const query = "SELECT * FROM `users` WHERE id = ?";
             const params = [id];
-            const result = await this.executeQuery(query, params);
+            const result = await this.executeQuery<RowDataPacket[]>(query, params);
+            if (result.length === 0) {
+                throw new UserNotFoundException(`User with id ${id} not found in the database`, 404);
+            }
             return this.mapToUser(result[0]);
         } catch (error) {
             throw new UserNotFoundException(`User with id ${id} not found`, 404, error as Error);
@@ -33,7 +37,10 @@ export default class UserRepository extends BaseRepository {
         try {
             const query = "SELECT * FROM `users` WHERE email = ?";
             const params = [email];
-            const result = await this.executeQuery(query, params);
+            const result = await this.executeQuery<RowDataPacket[]>(query, params);
+            if (result.length === 0) {
+                throw new UserNotFoundException(`User with email ${email} not found in the database`, 404);
+            }
             return this.mapToUser(result[0]);
         } catch (error) {
             throw new UserNotFoundException(`User with email ${email} not found`, 404, error as Error);
@@ -44,9 +51,8 @@ export default class UserRepository extends BaseRepository {
         try {
             const query = "INSERT INTO `users` (`email`, `username`, `password`, `created_at`) VALUES (?, ?, ?, NOW())";
             const params = [user.email, user.username, user.password];
-            const result = await this.executeQuery(query, params);
-            const id = result[0].insertId;
-            console.log(`Created user with id ${id}`);
+            const result  = await this.executeQuery<ResultSetHeader>(query, params);
+            const id: number = result.insertId;
             return await this.getUserById(id);
         } catch (error) {
             console.log(error);

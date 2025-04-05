@@ -1,16 +1,17 @@
-import jwt, {Secret} from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import UserRequestDTO from "../dtos/UserRequestDTO";
 import UserResponseDTO from "../dtos/UserResponseDTO";
 import IUser from "../interfaces/IUser";
 import UserRepository from "../repositories/UserRepository";
-import {UserDTOException} from "../exceptions/UserDTOException";
+import { UserDTOException } from "../exceptions/UserDTOException";
 import LoginRequestDTO from "../dtos/LoginRequestDTO";
-import {UserNotFoundException} from "../exceptions/UserNotFoundException";
-import {PasswordValidationException} from "../exceptions/PasswordValidationException";
+import { UserNotFoundException } from "../exceptions/UserNotFoundException";
+import { PasswordValidationException } from "../exceptions/PasswordValidationException";
 import LoginResponseDTO from "../dtos/LoginResponseDTO";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import {UserCreationException} from "../exceptions/UserCreationException";
+import { UserCreationException } from "../exceptions/UserCreationException";
+import { ConfigurationException } from "../exceptions/ConfigurationException";
 
 dotenv.config();
 
@@ -20,7 +21,10 @@ export default class AuthService {
 
     constructor() {
         this.userRepository = new UserRepository();
-        this.jwtSecret = process.env.JWT_SECRET ?? 'a_very_secret_key';
+        if (!process.env.JWT_SECRET) {
+            throw new ConfigurationException("JWT_SECRET environment variable is not set", 500);
+        }
+        this.jwtSecret = process.env.JWT_SECRET;
     }
 
     public async register(userRequest: UserRequestDTO): Promise<UserResponseDTO> {
@@ -56,7 +60,7 @@ export default class AuthService {
             throw new PasswordValidationException("Password is incorrect", 400);
         }
         // Generate JWT
-        const token = jwt.sign({id: user.id}, this.jwtSecret, {expiresIn: "1h"});
+        const token = jwt.sign({ id: user.id }, this.jwtSecret, { expiresIn: "1h" });
 
         // Return JWT and user info
         return new LoginResponseDTO(user.id, user.username, token, user.admin);

@@ -19,11 +19,11 @@ export class BaseRepository {
         }
     }
 
-    public async executeQuery(query: string, params?: any[]): Promise<any[]> {
+    public async executeQuery<T>(query: string, params?: any[]): Promise<T> {
         await this.openConnection();
         try {
             const [results] = await this.connection!.execute(query, params);
-            return results as any[];
+            return results as T;
         } catch (error) {
             console.error(`Error executing query: ${error}`);
             throw new Error("Error executing query");
