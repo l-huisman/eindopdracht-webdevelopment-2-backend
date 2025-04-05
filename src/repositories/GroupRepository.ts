@@ -13,7 +13,7 @@ export default class GroupRepository extends BaseRepository {
     
     public async getGroupsByUser(userId: number): Promise<any[]> {
         try {
-            const query = `SELECT g.id, g.name FROM 'groups' g JOIN user_groups ug ON g.id = ug.group_id WHERE ug.user_id = ?`;
+            const query = `SELECT g.id, g.name FROM \`groups\` g JOIN user_groups ug ON g.id = ug.group_id WHERE ug.user_id = ?`;
             const params = [userId];
             const result = await this.executeQuery<any[]>(query, params);
             if (result.length === 0) {
