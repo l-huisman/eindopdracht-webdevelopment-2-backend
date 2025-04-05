@@ -2,7 +2,8 @@
 
 ## Project Description
 
-This project is a backend application built with TypeScript, SQL, and JavaScript. It uses Docker for containerization and includes a MySQL database and Adminer for database management.
+This project is a backend application built with TypeScript, SQL, and JavaScript. It uses Docker for containerization
+and includes a MySQL database and Adminer for database management.
 
 ## Prerequisites
 
@@ -21,7 +22,8 @@ cd eindopdracht-webdevelopment-2-backend
 
 ### Set the Environment Variables
 
-Create a `.env` file based on the `.env.example` file in the root of the project and add the following environment variables:
+Create a `.env` file based on the `.env.example` file in the root of the project and add the following environment
+variables:
 
 ```sh
 DB_HOST=db
