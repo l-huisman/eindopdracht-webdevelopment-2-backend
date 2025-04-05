@@ -31,6 +31,7 @@ DB_DATABASE=your_database_name
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 DB_PORT=3306
+JWT_SECRET=your_jwt_secret
 ```
 
 ### Build and Run the Application
