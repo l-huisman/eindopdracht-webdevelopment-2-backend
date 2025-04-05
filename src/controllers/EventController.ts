@@ -6,6 +6,7 @@ import {EventService} from "../services/EventService";
 import {EventResponseDTO} from "../dtos/EventResponseDTO";
 import {EventRequestDTO} from "../dtos/EventRequestDTO";
 import BaseController from "./BaseController";
+import {NotImplementedException} from "../exceptions/NotImplementedException";
 
 export default class EventController extends BaseController {
     private readonly eventService: EventService;
@@ -72,6 +73,10 @@ export default class EventController extends BaseController {
             const [statusCode, apiResponse] = this.errorHandler(error, EventNotFoundException);
             res.status(statusCode).json(apiResponse);
         }
+    }
+
+    public async getEventsByGroupAndDate(req: Request, res: Response): Promise<void> {
+        throw new NotImplementedException("getEventsByGroupAndDate method not implemented", 501);
     }
 
     public async postEvent(req: Request, res: Response): Promise<void> {
