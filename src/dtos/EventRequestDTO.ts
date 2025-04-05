@@ -7,7 +7,7 @@ export class EventRequestDTO {
     public startTime: number;
     public endTime: number;
     public groupId: number;
-    public userId: string;
+    public userId: number;
 
     constructor(
         day: number,
@@ -18,7 +18,7 @@ export class EventRequestDTO {
         startTime: number,
         endTime: number,
         groupId: number,
-        userId: string
+        userId: number
     ) {
         this.day = day;
         this.month = month;
