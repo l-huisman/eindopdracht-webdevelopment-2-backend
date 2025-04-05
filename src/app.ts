@@ -25,7 +25,7 @@ class App {
     }
 
     private routes(): void {
-        this.server.use(routes);
+        this.server.use('/v1', routes);
     }
 
 }
